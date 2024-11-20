@@ -1,4 +1,4 @@
-package br.com.payment.repositories.usuario;
+package br.com.payment.repositories;
 
 import java.util.Optional;
 
@@ -11,4 +11,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	Optional<Usuario> findUserByCpfCnpj(String cpfCnpj);
 	
 	Optional<Usuario> findUserById(Long id);
+
+	Boolean existsByEmail(String email);
 }
