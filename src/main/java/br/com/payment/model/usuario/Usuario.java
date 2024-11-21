@@ -7,6 +7,7 @@ import static java.util.Objects.hash;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+import br.com.payment.dtos.UsuarioDto;
 import br.com.payment.enums.TipoUsuario;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,13 +39,22 @@ public class Usuario {
 	private String email;
 
 	@Enumerated(STRING)
-	private TipoUsuario tipo;
+	private TipoUsuario tipoUsuario;
 	
 	private String nome;
 
 	private BigDecimal saldo;
 	
 	private String senha;
+	
+	public Usuario(UsuarioDto usuario) {
+		cpfCnpj = usuario.documento();
+		setEmail(usuario.email());
+		setNome(usuario.nome());
+		setSenha(usuario.senha());
+		setSaldo(usuario.saldo());
+		setTipoUsuario(usuario.tipoUsuario());
+	}
 
 	@Override
 	public int hashCode() {
@@ -78,7 +88,7 @@ public class Usuario {
 		builder.append(", email=");
 		builder.append(email);
 		builder.append(", tipo=");
-		builder.append(tipo);
+		builder.append(tipoUsuario);
 		builder.append("]");
 		return builder.toString();
 	}
